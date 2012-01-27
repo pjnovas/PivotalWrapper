@@ -1,0 +1,7 @@
+<% if (proyects.length) { %>
+  <ul>
+    <% proyects.forEach(function(p){ %>
+      <li><a href="/projects/<%= p.id %>/stories"><%= p.name %></a></li>
+    <% }) %>
+  </ul>
+<% } %>

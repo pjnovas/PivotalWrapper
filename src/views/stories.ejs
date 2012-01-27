@@ -1,0 +1,7 @@
+<% if (stories.length) { %>
+  <ul>
+    <% stories.forEach(function(s){ %>
+      <li><a id="<%= s.id %>"><%= s.name %></a></li>
+    <% }) %>
+  </ul>
+<% } %>
