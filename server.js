@@ -23,22 +23,7 @@ app.set('view engine', 'ejs');
 // -----------------------------------------------
 // Routes ----------------------------------------
 app.get('/', function (req, res){
-	/*res.render('login', {
-  		locals: {
-	    	title: 'LogIn'
-	    	}
-	    });
-*/
-	    res.redirect('/projects');
-});
-
-app.post('/authenticate', function(req, res){
-	/*pivotal.getToken({
-		userName: req.body.user.name,
-		password: req.body.user.pass 
-	}, function (){*/
-		res.redirect('/projects');
-	//});
+	res.redirect('/projects');
 });
 
 app.get('/projects', function(req, res){
@@ -53,16 +38,49 @@ app.get('/projects', function(req, res){
     });
 });
 
-app.get('/projects/:projectId/stories', function(req, res){
-	pivotal.getStories(req.params.projectId, function(stories){
-		
+function searchStories(filter, res){
+	pivotal.getStories(filter, function(found){
 		res.render('stories', {
 			locals: {
 		    	title: 'Historias',
-		    	stories: stories
+		    	stories: found
 		    	}
 	    });
-    });
+	}, function(error){
+		
+	});
+}
+
+app.get('/projects/:projectId/stories', function(req, res){
+	searchStories({projectId: req.params.projectId}, res);
+});
+
+app.get('/projects/:projectId/stories/:storyId', function(req, res){
+	searchStories({
+		projectId: req.params.projectId,
+		storyId: req.params.storyId,
+	}, res);
+});
+
+app.get('/projects/:projectId/stories/type/:type', function(req, res){
+	searchStories({
+		projectId: req.params.projectId,
+		type: req.params.type
+	}, res);
+});
+
+app.get('/projects/:projectId/stories/label/:label', function(req, res){
+	searchStories({
+		projectId: req.params.projectId,
+		label: req.params.label
+	}, res);
+});
+
+app.get('/projects/:projectId/stories/name/:name', function(req, res){
+	searchStories({
+		projectId: req.params.projectId,
+		name: req.params.name
+	}, res);
 });
 
 app.use(express.static(__dirname + '/public'));

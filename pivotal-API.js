@@ -2,16 +2,16 @@
  * @author pjnovas
  */
 
-var https = require('https');
+var http = require('https');
 var xml2js = require('xml2js');
 
 var currentToken = '6dc1e69e8afb9223dc219bd216a89e5d';
 
-function callAPI(options, end){
+function callAPI(options, end, error){
 	
-	https.get(options, function(res){
+	http.get(options, function(res){
 		console.log('STATUS: ' + res.statusCode);
-		console.log('HEADERS: ' + JSON.stringify(res.headers));
+		//console.log('HEADERS: ' + JSON.stringify(res.headers));
 
 		var body = "";
 
@@ -31,34 +31,16 @@ function callAPI(options, end){
 		});
 		
 	}).on('error', function(e) {
-	  	console.log("Got error: " + e.message);
+	  	if (error) error("error: " + e.message);
 	});
 
 }
-
-exports.getToken = function (opts, callback){
-	/*
-	var options = {
-	  agent : false,
-	  host : 'www.pivotaltracker.com',
-	  //port : 443,
-	  path : '/services/v3/tokens/active',
-	  auth : opts.userName + ':' + opts.password
-	};
-	
-	callAPI(options, function(result){
-		currentToken = result.guid;
-		callback();
-	});
-	*/
-};
 
 exports.getProjects = function(callback){
 	
 	var options = {
 		agent : false,
 		host : 'www.pivotaltracker.com',
-		//port : 443,
 		path : '/services/v3/projects',
 		headers : {
 			'X-TrackerToken' : currentToken
@@ -71,20 +53,40 @@ exports.getProjects = function(callback){
 	
 };
 
-exports.getStories = function(projectId, callback){
+exports.getStories = function(filter, succes, error){
+	var options = {},
+		appendfilter = "?filter=",
+		path = '/services/v3/projects/' + filter.projectId + '/stories';
 	
-	var options = {
+	if (filter.storyId) path += '/' + filter.storyId;	
+	else {
+		appendfilter += (filter.type && "type%3A" + filter.type + "%20") || "";
+		appendfilter += (filter.label && "label%3A" + filter.label + "%20") || "";
+		appendfilter += (filter.name && "name%3A%22" + filter.name + "%22%20") || "";
+		path +=	appendfilter;
+	}
+
+	console.log(path);
+
+	options = {
 		agent : false,
 		host : 'www.pivotaltracker.com',
-		//port : 443,
-		path : '/services/v3/projects/' + projectId + '/stories',
+		path : path,
 		headers : {
 			'X-TrackerToken' : currentToken
 		}
 	};
 
 	callAPI(options, function(result){
-		callback(result.story);
+		console.dir(result);
+		succes(result.story || [result]);
+	}, function (err){
+		if (error) error(err);
 	});
 	
 };
+
+
+
+
+
