@@ -3,7 +3,8 @@
  */
 
 var express = require('express');
-var pivotal = require('./pivotal-API');
+var projectRoutes = require('./routes/project');
+var storyRoutes = require('./routes/story');
 
 var app = express.createServer();
 
@@ -20,69 +21,16 @@ app.configure(function(){
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-// -----------------------------------------------
-// Routes ----------------------------------------
 app.get('/', function (req, res){
 	res.redirect('/projects');
 });
 
-app.get('/projects', function(req, res){
+app.get('/projects', projectRoutes.getMyProjects);
 
-	pivotal.getProjects(function(projects){
-		
-		res.render('projects', {
-			locals: {
-		    	title: 'Proyectos',
-		    	proyects: projects
-		    	}
-	    });
-    });
-});
-
-function searchStories(filter, res){
-	pivotal.getStories(filter, function(found){
-		res.render('stories', {
-			locals: {
-		    	title: 'Historias',
-		    	stories: found
-		    	}
-	    });
-	}, function(error){
-		
-	});
-}
-
-app.get('/projects/:projectId/stories', function(req, res){
-	searchStories({projectId: req.params.projectId}, res);
-});
-
-app.get('/projects/:projectId/stories/:storyId', function(req, res){
-	searchStories({
-		projectId: req.params.projectId,
-		storyId: req.params.storyId,
-	}, res);
-});
-
-app.get('/projects/:projectId/stories/type/:type', function(req, res){
-	searchStories({
-		projectId: req.params.projectId,
-		type: req.params.type
-	}, res);
-});
-
-app.get('/projects/:projectId/stories/label/:label', function(req, res){
-	searchStories({
-		projectId: req.params.projectId,
-		label: req.params.label
-	}, res);
-});
-
-app.get('/projects/:projectId/stories/name/:name', function(req, res){
-	searchStories({
-		projectId: req.params.projectId,
-		name: req.params.name
-	}, res);
-});
+app.get('/projects/:projectId/stories', storyRoutes.getAllStoriesByProject);
+app.get('/projects/:projectId/stories/:storyId', storyRoutes.getStory);
+app.get('/projects/:projectId/stories/type/:type', storyRoutes.getStoriesByType);
+app.get('/projects/:projectId/stories/label/:label', storyRoutes.getStoriesByLabel);
 
 app.use(express.static(__dirname + '/public'));
 
