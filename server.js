@@ -27,6 +27,7 @@ app.get('/', function (req, res){
 });
 
 app.get('/projects', function(req, res){
+
 	pivotal.getProjects(function(projects){
 		
 		res.render('projects', {

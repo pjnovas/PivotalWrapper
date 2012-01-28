@@ -1,7 +1,58 @@
+
+<!--<div class="story">
+	<div class="header">
+		<span class="release">Contrato Marco</span>
+		<span class="itemNbr">Backlog item #5</span>
+		<span class="project">SUD</span>
+	</div>
+	<div class="body">
+		<div class="left">
+			<div class="name">El usuario de Autogestión Web visualiza los tres Dashboard con el último trámite generado</div>
+			<div class="description">Como usuario de Autogestión Web quiero visualizar los tres dashboard con el último tramite generado para mantener una mejor experiencia de usuario en su uso.</div>
+			<div class="notes">algunas notas ..</div>
+		</div>
+		<div class="right">
+			<div class="priority">I: 1990</div>
+			<div class="estimation">E: 3
+				<div class="bottom">
+					<span>F.I.:</span>
+					<span>F.F.:</span>
+				</div>
+			</div>
+		</div>
+	<div>
+</div>-->
+
+
 <% if (stories.length) { %>
-  <ul>
     <% stories.forEach(function(s){ %>
-      <li><a id="<%= s.id %>"><%= s.name %></a></li>
+		<div id="<%= s.id %>" class="story">
+			<div class="header">
+				<span class="release">Contrato Marco</span>
+				<span class="itemNbr">Backlog item #</span>
+				<span class="project">SUD</span>
+			</div>
+			<div class="body">
+				<div class="left">
+					<div class="name"><%= s.name %></div>
+					<div class="description"><%= s.description %></div>
+					<div class="notes">algunas notas ..</div>
+				</div>
+				<div class="right">
+					<div class="priority">I: </div>
+					<div class="estimation">E: <%= s.estimate %>
+						<div class="bottom">
+							<span>F.I.:</span>
+							<span>F.F.:</span>
+						</div>
+					</div>
+				</div>
+			<div>
+		</div>
     <% }) %>
-  </ul>
 <% } %>
+
+
+
+
+

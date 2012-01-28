@@ -5,3 +5,126 @@ body
 	color: #000;
 	background-color: #FFF;		
 }
+
+/* STORIES ***************************************/
+
+.story {
+	width: 550px;
+	height: 300px;
+	border: solid 1px #000;
+	float: left;
+}
+
+/* ---- HEADER */
+
+.story .header {
+	width: 100%;
+	height: 50px;
+	position: relative;
+	background-color: silver;
+	color: yellow;
+	border-bottom: solid 1px #000;
+}
+
+	.story .header .release {
+		position: absolute;
+		top: 5px;
+		left: 20px;
+		font-size: 16px;
+	}
+
+	.story .header .itemNbr {
+		position: absolute;
+		bottom: 2px;
+		right: 150px;	
+		font-size: 12px;
+	}
+
+	.story .header .project {
+		position: absolute;
+		top: 2px;
+		right: 10px;
+		font-size: 28px;
+	}
+
+
+/* ---- BODY */
+
+.story .body {
+	width: 100%;
+	height: 250px;
+	float: left;
+}
+
+	.story .body .left {
+		width:415px;
+		height: 250px;
+		margin: 10px 0 0 10px;
+		float: left;
+	}
+
+		.story .body .left .name {
+			font-weight: bold;
+			font-size:12px;
+			height:50px;
+			margin-bottom: 10px;
+		}
+
+		.story .body .left .description {
+			font-size:10px;
+			border:solid 2px #000;
+			height: 96px;
+			margin-bottom: 10px;
+			padding: 2px;
+		}
+
+		.story .body .left .notes {
+			font-size:10px;		
+			border:solid 2px #000;	
+			height: 46px;
+			padding: 2px;
+		}
+
+	.story .body .right {
+		width:100px;
+		height: 250px;
+		margin: 10px;
+		float: right;
+	}
+
+		.story .body .right .priority {
+			font-size:20px;
+			text-align: center;	
+			height:50px;
+			border:solid 2px #000;
+			margin-bottom: 10px;
+			line-height:2;
+		}
+
+		.story .body .right .estimation {
+			font-size:20px;
+			text-align: left;	
+
+			border:solid 2px #000;
+
+			position: relative;
+			padding-left:5px;
+			height: 160px;
+		}
+
+		.story .body .right .estimation .bottom {
+			width:100%;
+			height:40px;
+
+			position: absolute;
+			bottom:0px;
+			left: 5px;
+		}
+
+			.story .body .right .bottom span {
+				font-size:14px;
+				width: 100%;
+				float: left;
+			}
+
+/* ***********************************************/

@@ -8,7 +8,6 @@ var xml2js = require('xml2js');
 var currentToken = '6dc1e69e8afb9223dc219bd216a89e5d';
 
 function callAPI(options, end, error){
-	
 	http.get(options, function(res){
 		console.log('STATUS: ' + res.statusCode);
 		//console.log('HEADERS: ' + JSON.stringify(res.headers));
@@ -37,23 +36,21 @@ function callAPI(options, end, error){
 }
 
 exports.getProjects = function(callback){
-	
 	var options = {
-		agent : false,
-		host : 'www.pivotaltracker.com',
-		path : '/services/v3/projects',
-		headers : {
-			'X-TrackerToken' : currentToken
-		}
+			agent : false,
+			host : 'www.pivotaltracker.com',
+			path : '/services/v3/projects',
+			headers : {
+				'X-TrackerToken' : currentToken
+			}
 	};
 	
 	callAPI(options, function(result){
 		callback(result.project);
 	});
-	
 };
 
-exports.getStories = function(filter, succes, error){
+exports.getStories = function(filter, success, error){
 	var options = {},
 		appendfilter = "?filter=",
 		path = '/services/v3/projects/' + filter.projectId + '/stories';
@@ -79,11 +76,10 @@ exports.getStories = function(filter, succes, error){
 
 	callAPI(options, function(result){
 		console.dir(result);
-		succes(result.story || [result]);
+		success(result.story || [result]);
 	}, function (err){
 		if (error) error(err);
 	});
-	
 };
 
 
