@@ -41,7 +41,7 @@ exports.getToken = function (opts, callback){
 	var options = {
 	  agent : false,
 	  host : 'www.pivotaltracker.com',
-	  port : 443,
+	  //port : 443,
 	  path : '/services/v3/tokens/active',
 	  auth : opts.userName + ':' + opts.password
 	};
@@ -58,7 +58,7 @@ exports.getProjects = function(callback){
 	var options = {
 		agent : false,
 		host : 'www.pivotaltracker.com',
-		port : 443,
+		//port : 443,
 		path : '/services/v3/projects',
 		headers : {
 			'X-TrackerToken' : currentToken
@@ -76,7 +76,7 @@ exports.getStories = function(projectId, callback){
 	var options = {
 		agent : false,
 		host : 'www.pivotaltracker.com',
-		port : 443,
+		//port : 443,
 		path : '/services/v3/projects/' + projectId + '/stories',
 		headers : {
 			'X-TrackerToken' : currentToken
