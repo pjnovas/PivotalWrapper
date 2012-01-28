@@ -65,7 +65,7 @@ app.get('/projects/:projectId/stories', function(req, res){
 
 app.use(express.static(__dirname + '/public'));
 
-app.listen(process.env.C9_PORT || process.env.PORT || 80);
+app.listen(8080);
 console.log("Express server listening on port %d", app.address().port);
 
 
