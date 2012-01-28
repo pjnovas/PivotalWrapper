@@ -10,10 +10,10 @@ var mapToEntity = function(s, p){
 	return {
 		id: s.id,
 		name: s.name,
-		estimate: s.estimate,
+		estimate: (s.estimate > 0) ? s.estimate : '-',
 		description: s.description,
-		labels: s.labels,
-		type: s.type,
+		label: s.labels,
+		type: s.story_type,
 		priority: 0,
 		project: p,
 		started: "", //(s.current_state === "started" && s.updated_at || "",
