@@ -23,20 +23,22 @@ app.set('view engine', 'ejs');
 // -----------------------------------------------
 // Routes ----------------------------------------
 app.get('/', function (req, res){
-	res.render('login', {
+	/*res.render('login', {
   		locals: {
 	    	title: 'LogIn'
 	    	}
 	    });
+*/
+	    res.redirect('/projects');
 });
 
 app.post('/authenticate', function(req, res){
-	pivotal.getToken({
+	/*pivotal.getToken({
 		userName: req.body.user.name,
 		password: req.body.user.pass 
-	}, function (){
+	}, function (){*/
 		res.redirect('/projects');
-	});
+	//});
 });
 
 app.get('/projects', function(req, res){

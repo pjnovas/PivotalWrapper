@@ -5,7 +5,7 @@
 var https = require('https');
 var xml2js = require('xml2js');
 
-var currentToken;
+var currentToken = '6dc1e69e8afb9223dc219bd216a89e5d';
 
 function callAPI(options, end){
 	
@@ -37,7 +37,7 @@ function callAPI(options, end){
 }
 
 exports.getToken = function (opts, callback){
-	
+	/*
 	var options = {
 	  agent : false,
 	  host : 'www.pivotaltracker.com',
@@ -50,7 +50,7 @@ exports.getToken = function (opts, callback){
 		currentToken = result.guid;
 		callback();
 	});
-
+	*/
 };
 
 exports.getProjects = function(callback){
