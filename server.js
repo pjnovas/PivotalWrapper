@@ -3,8 +3,10 @@
  */
 
 var express = require('express');
+
 var projectRoutes = require('./routes/project');
 var storyRoutes = require('./routes/story');
+var iterationRoutes = require('./routes/iteration');
 
 var app = express.createServer();
 
@@ -26,11 +28,20 @@ app.get('/', function (req, res){
 });
 
 app.get('/projects', projectRoutes.getMyProjects);
+//app.get('/projects/:projectId', );
 
 app.get('/projects/:projectId/stories', storyRoutes.getAllStoriesByProject);
 app.get('/projects/:projectId/stories/:storyId', storyRoutes.getStory);
 app.get('/projects/:projectId/stories/type/:type', storyRoutes.getStoriesByType);
 app.get('/projects/:projectId/stories/label/:label', storyRoutes.getStoriesByLabel);
+
+app.get('/projects/:projectId/iterations', iterationRoutes.getAll);
+app.get('/projects/:projectId/iterations/current', iterationRoutes.getCurrent);
+app.get('/projects/:projectId/iterations/current_backlog', iterationRoutes.getCurrentBacklog);
+app.get('/projects/:projectId/iterations/backlog', iterationRoutes.getBacklog);
+app.get('/projects/:projectId/iterations/done/:howMany', iterationRoutes.getDone);
+
+
 
 app.use(express.static(__dirname + '/public'));
 

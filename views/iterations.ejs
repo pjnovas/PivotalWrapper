@@ -1,0 +1,14 @@
+<% if (iterations.length) { %>
+  <ul>
+    <% iterations.forEach(function(i){ %>
+      <li>
+      	<b>Sprint #<%= i.number %></b>
+      	<br/>
+      	<p>Inicio: <%= i.start %></p>
+      	<p>Fin: <%= i.end %></p>
+      	<p>FF: <%= i.strength %></p>
+      	<hr/>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
