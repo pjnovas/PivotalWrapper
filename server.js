@@ -36,6 +36,7 @@ app.get('/projects/:projectId/stories/type/:type', storyRoutes.getStoriesByType)
 app.get('/projects/:projectId/stories/label/:label', storyRoutes.getStoriesByLabel);
 
 app.get('/projects/:projectId/iterations:format?', iterationRoutes.getAll);
+app.get('/projects/:projectId/iterations/:iterationId/print', iterationRoutes.printIteration);
 app.get('/projects/:projectId/iterations/current', iterationRoutes.getCurrent);
 app.get('/projects/:projectId/iterations/current_backlog', iterationRoutes.getCurrentBacklog);
 app.get('/projects/:projectId/iterations/backlog', iterationRoutes.getBacklog);

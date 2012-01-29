@@ -11,18 +11,28 @@
   </ul>
 </div>
 <div class="row">
-  <div class="span16">
+  <div class="span14">
     <ul id="sprints"></ul>
   </div>
 </div>
 
 <script id="tmplSprint" type="text/x-jquery-tmpl">
   <li>
-    <b>Sprint #${number}</b>
-    <br/>
+    <p><b>Sprint #${number}</b></p>
     <p>Inicio: ${start}</p>
     <p>Fin: ${end}</p>
-    <p>FF: ${strength}</p>
+    <p>FF: %${strength}</p>
+    <p>VE: ${storyAmm}</p>
+    <p>TE: ${tasksAmm}</p>
+    <a class="stories">Historias (${stories.length})</a>
+    <a href="/projects/<%= project.id %>/iterations/${number}/print" target="_blank">P!</a>
+    <ul class="storyList">
+      {{each stories}}
+        <li>
+          [${estimate} pts] ${name}
+        </li>
+      {{/each}}
+    </ul>
     <hr/>
   </li>
 </script>

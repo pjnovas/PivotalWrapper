@@ -43,3 +43,32 @@ exports.getAll = function(req, res){
 	    });
     }
 };
+
+exports.printIteration = function(req, res){	
+	var pid = req.params.projectId, 
+		iid = req.params.iterationId;
+
+	projectModel.Project.getOne(pid, function (proj){
+			
+		function renderView(data){
+			res.render('printStories', {
+				layout: false,
+				locals: {
+			    	title: 'Historias',
+			    	stories: data.stories,
+			    	project: proj
+			    }
+		    });	
+		}
+
+		if (iid === '1'){
+			iterationModel.Iteration.getCurrent(pid, function (data){
+				renderView(data);
+			});
+		} else {
+			iterationModel.Iteration.getOne(pid, iid, function (data){
+				renderView(data);
+			});
+		}
+	});
+};

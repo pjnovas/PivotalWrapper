@@ -12,6 +12,10 @@ $(document).ready(function(){
 		getIterations();
 	});
 
+	$('a.stories', '#sprints').live('click', function(){
+		$('ul.storyList', $(this).parents('li')).toggle('fast');	
+	});
+
 	updateNav();
 	getIterations();
 });
@@ -26,6 +30,9 @@ function updateNav(){
 }
 
 function getIterations(){
+
+	$("#sprints li").remove();
+	$("<li>").append("<div class='loading'></div>").appendTo("#sprints");
 
 	var which = $('li.active a', 'ul.pills').attr('href').substr(1);
 	
@@ -49,3 +56,4 @@ function bindIterations(sprints){
 	$("#sprints li").remove();
     $("#tmplSprint").tmpl(sprints).appendTo("#sprints");
 }
+

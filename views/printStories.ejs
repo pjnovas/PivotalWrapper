@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /> 
+
+  <style type="text/css">
+	html, body {
+	    background-color: #FFF;
+	}
+  </style>
+
+  </head>
+	  <body>
+		<% if (stories.length) { %>
+			<% stories.forEach(function(s){ %>
+				<% if (s.type === "feature") { %>
+					<div id="<%= s.id %>" class="story">
+						<div class="header">
+							<span class="release"><%= s.label %></span>
+							<span class="itemNbr">Backlog item #<%= s.id %></span>
+							<span class="project"><%= project.name %></span>
+						</div>
+						<div class="body">
+							<div class="left">
+								<div class="name"><%= s.name %></div>
+								<div class="description"><%= s.description %></div>
+								<div class="notes">[notas]</div>
+							</div>
+							<div class="right">
+								<div class="priority">I: <%= s.priority %></div>
+								<div class="estimation">E: <%= s.estimate %>
+									<div class="bottom">
+										<span>F.I.: <%= s.started %></span>
+										<span>F.F.: <%= s.finished %></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% } %>
+			<% }) %>
+		<% } %>
+	</body>
+</html>
