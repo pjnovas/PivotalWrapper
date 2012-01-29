@@ -4,10 +4,10 @@ var iterationModel = require('../models/iteration');
 exports.getCurrent = function(req, res){
 	
 	iterationModel.Iteration.getCurrent(req.params.projectId, function (is){
-		res.render('iterations', {
+		res.render('currentIteration', {
 			locals: {
 		    	title: 'Iteracion Actual',
-		    	iterations: [is]
+		    	iteration: is
 		    	}
 	    });
     });

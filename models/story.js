@@ -10,7 +10,7 @@ var mapToEntity = function(s, p){
 	return {
 		id: s.id,
 		name: s.name,
-		estimate: (s.estimate > 0) ? s.estimate : '-',
+		estimate: (s.estimate > 0) ? s.estimate : 0,
 		description: s.description,
 		label: s.labels,
 		type: s.story_type,
@@ -19,7 +19,7 @@ var mapToEntity = function(s, p){
 		started: "", //(s.current_state === "started" && s.updated_at || "",
 		finished: "" //(s.current_state === "finished" && s.updated_at) || ""
 	};
-}
+};
 
 var mapListToEntity = function(ss, project){
 	var list = [],
@@ -39,7 +39,8 @@ var mapListToEntity = function(ss, project){
 	}	
 
 	return list;
-}
+};
+exports.mapStoryList = mapListToEntity;
 
 exports.Story.getAll = function(projectId, cb){
 
