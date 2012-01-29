@@ -2,10 +2,15 @@
 var http = require('https');
 var xml2js = require('xml2js');
 
-exports.callAPI = function(options, end, error){
+exports.callAPI = function(path, end, error){
 
-	options.headers = {
-		'X-TrackerToken' : '6dc1e69e8afb9223dc219bd216a89e5d'
+	var options = {
+			agent : false,
+			host : 'www.pivotaltracker.com',
+			path : path,
+			headers : {
+				'X-TrackerToken' : '6dc1e69e8afb9223dc219bd216a89e5d'
+			}
 	};
 
 	http.get(options, function(res){

@@ -2,8 +2,7 @@
 var pivotal = require('./API-helper');
 
 exports.getStories = function(filter, success, error){
-	var options = {},
-		appendfilter = "?filter=",
+	var appendfilter = "?filter=",
 		path = '/services/v3/projects/' + filter.projectId + '/stories';
 	
 	if (filter.storyId) path += '/' + filter.storyId;	
@@ -14,13 +13,7 @@ exports.getStories = function(filter, success, error){
 		path +=	appendfilter;
 	}
 
-	options = {
-		agent : false,
-		host : 'www.pivotaltracker.com',
-		path : path
-	};
-
-	pivotal.callAPI(options, function(result){
+	pivotal.callAPI(path, function(result){
 		success(result.story || [result]);
 	}, function (err){
 		if (error) error(err);
