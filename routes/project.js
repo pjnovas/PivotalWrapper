@@ -13,3 +13,16 @@ exports.getMyProjects = function(req, res){
 	    });
     });
 };
+
+exports.getProject = function(req, res){
+	
+	projectModel.Project.getOne(req.params.projectId, function (proj){
+	
+		res.render('project', {
+			locals: {
+		    	title: "Dashboard " + proj.name,
+		    	project: proj
+		    	}
+	    });
+    });
+};

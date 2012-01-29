@@ -28,7 +28,7 @@ app.get('/', function (req, res){
 });
 
 app.get('/projects', projectRoutes.getMyProjects);
-//app.get('/projects/:projectId', );
+app.get('/projects/:projectId', projectRoutes.getProject);
 
 app.get('/projects/:projectId/stories', storyRoutes.getAllStoriesByProject);
 app.get('/projects/:projectId/stories/:storyId', storyRoutes.getStory);

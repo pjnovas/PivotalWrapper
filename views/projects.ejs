@@ -1,7 +1,18 @@
-<% if (projects.length) { %>
-  <ul>
-    <% projects.forEach(function(p){ %>
-      <li><a href="/projects/<%= p.id %>/stories"><%= p.name %></a></li>
-    <% }) %>
-  </ul>
-<% } %>
+
+<div class="page-header">
+	<h1>Proyectos</h1>
+</div>
+<div class="row">
+  <div class="span16">
+    <h2></h2>
+    <% if (projects.length) { %>
+	  <ul>
+	    <% projects.forEach(function(p){ %>
+	      <li><a href="/projects/<%= p.id %>"><%= p.name %></a></li>
+	    <% }) %>
+	  </ul>
+	<% } %>
+  </div>
+</div>
+
+

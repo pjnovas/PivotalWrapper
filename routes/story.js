@@ -1,17 +1,22 @@
 
 var storyModel = require('../models/story');
+var projectModel = require('../models/project');
 
 exports.getAllStoriesByProject = function(req, res){
 
-	storyModel.Story.getAll(req.params.projectId, function(found){
-	
-		res.render('stories', {
-			locals: {
-		    	title: 'Historias',
-		    	stories: found
-		    	}
-	    });	
+	projectModel.Project.getOne(req.params.projectId, function (proj){
+		
+		storyModel.Story.getAll(req.params.projectId, function(found){
+		
+			res.render('stories', {
+				locals: {
+			    	title: 'Historias',
+			    	stories: found,
+			    	project: proj
+			    	}
+		    });	
 
+		});
 	});
 };
 
@@ -31,29 +36,37 @@ exports.getStory = function(req, res){
 
 exports.getStoriesByType = function(req, res){
 	
-	storyModel.Story.getByType(req.params.projectId, req.params.type, function(found){
+	projectModel.Project.getOne(req.params.projectId, function (proj){
 
-		res.render('stories', {
-			locals: {
-		    	title: 'Historias de tipo: ' + req.params.type,
-		    	stories: found
-		    	}
-	    });	
+		storyModel.Story.getByType(req.params.projectId, req.params.type, function(found){
+
+			res.render('stories', {
+				locals: {
+			    	title: 'Historias de tipo: ' + req.params.type,
+			    	stories: found,
+			    	project: proj
+			    	}
+		    });	
+
+		});
 
 	});
-
 };
 
 exports.getStoriesByLabel = function(req, res){
 
-	storyModel.Story.getByType(req.params.projectId, req.params.label, function(found){
+	projectModel.Project.getOne(req.params.projectId, function (proj){
 
-		res.render('stories', {
-			locals: {
-		    	title: 'Historias con etiqueta ' + req.params.label,
-		    	stories: found
-		    	}
-	    });	
+		storyModel.Story.getByType(req.params.projectId, req.params.label, function(found){
 
+			res.render('stories', {
+				locals: {
+			    	title: 'Historias con etiqueta ' + req.params.label,
+			    	stories: found,
+			    	project: proj
+			    	}
+		    });	
+
+		});
 	});
 };

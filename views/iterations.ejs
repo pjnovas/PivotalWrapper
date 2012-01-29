@@ -1,14 +1,32 @@
-<% if (iterations.length) { %>
-  <ul>
-    <% iterations.forEach(function(i){ %>
-      <li>
-      	<b>Sprint #<%= i.number %></b>
-      	<br/>
-      	<p>Inicio: <%= i.start %></p>
-      	<p>Fin: <%= i.end %></p>
-      	<p>FF: <%= i.strength %></p>
-      	<hr/>
-      </li>
-    <% }) %>
+
+<div class="page-header">
+  <h1><a href="/projects/<%= project.id %>"><%= project.name %></a> - <%= title %></h1>
+
+  <ul class="pills">
+      <li><a href="/projects/<%= project.id %>/iterations">Todos</a></li>
+      <li><a href="/projects/<%= project.id %>/iterations/current">Actual</a></li>
+      <li><a href="/projects/<%= project.id %>/iterations/current_backlog">Actual y Backlog</a></li>
+      <li><a href="/projects/<%= project.id %>/iterations/backlog">Backlog</a></li>
+      <li><a href="/projects/<%= project.id %>/iterations/done/1">Terminados</a></li>
   </ul>
-<% } %>
+</div>
+<div class="row">
+  <div class="span16">
+   
+    <% if (iterations.length) { %>
+      <ul>
+        <% iterations.forEach(function(i){ %>
+          <li>
+          	<b>Sprint #<%= i.number %></b>
+          	<br/>
+          	<p>Inicio: <%= i.start %></p>
+          	<p>Fin: <%= i.end %></p>
+          	<p>FF: <%= i.strength %></p>
+          	<hr/>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+  </div>
+</div>
