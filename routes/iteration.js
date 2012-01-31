@@ -72,3 +72,17 @@ exports.printIteration = function(req, res){
 		}
 	});
 };
+
+exports.getCurrentBurnDown = function(req, res){	
+	res.render('printBurnDown', {
+		layout: false,
+		locals: {
+	    	title: 'Historias',
+	    	projectId: req.params.projectId
+	    }
+    });	
+};
+
+
+
+

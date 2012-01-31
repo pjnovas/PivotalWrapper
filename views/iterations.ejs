@@ -18,14 +18,16 @@
 
 <script id="tmplSprint" type="text/x-jquery-tmpl">
   <li>
-    <p><b>Sprint #${number}</b></p>
+    <p><b>Sprint #${number}</b> - 
+    	<a href="/projects/<%= project.id %>/iterations/burnDown" target="_blank">burn down</a>
+    	</p>
     <p>Inicio: ${start}</p>
     <p>Fin: ${end}</p>
     <p>FF: %${strength}</p>
     <p>VE: ${storyAmm}</p>
     <p>TE: ${tasksAmm}</p>
-    <a class="stories">Historias (${stories.length})</a>
-    <a href="/projects/<%= project.id %>/iterations/${number}/print" target="_blank">P!</a>
+    <a class="stories">Historias (${stories.length})</a>&nbsp;&nbsp;
+    <a href="/projects/<%= project.id %>/iterations/${number}/print" target="_blank">imprimir</a>
     <ul class="storyList">
       {{each stories}}
         <li>
@@ -37,4 +39,4 @@
   </li>
 </script>
 
-<script type="text/javascript" src="/js/iteration.js" ></script>
+<script type="text/javascript" src="/js/views/iteration.js" ></script>
