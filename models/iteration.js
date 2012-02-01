@@ -93,7 +93,7 @@ exports.Iteration.getBacklog = function(pid, cb){
 	});
 };
 
-exports.Iteration.getIcebox = function(pid, cb){
+exports.Iteration.getAll = function(pid, cb){
 	pivotal.getAllIterations(pid, function(iterations){
 		cb( mapListToEntity(iterations, pid) );
 	});

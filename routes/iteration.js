@@ -28,7 +28,7 @@ exports.getDone = function(req, res){
 
 exports.getAll = function(req, res){
 	if (req.params.format){
-		iterationModel.Iteration.getIcebox(req.params.projectId, function (data){				
+		iterationModel.Iteration.getAll(req.params.projectId, function (data){				
 			res.send(data, 200); 
 	    });
     }

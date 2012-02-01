@@ -7,6 +7,7 @@ var express = require('express');
 var projectRoutes = require('./routes/project');
 var storyRoutes = require('./routes/story');
 var iterationRoutes = require('./routes/iteration');
+var releaseRoutes = require('./routes/release');
 
 var app = express.createServer();
 
@@ -27,6 +28,8 @@ app.get('/', function (req, res){
 	res.redirect('/projects');
 });
 
+//app.get('/login', );
+
 app.get('/projects', projectRoutes.getMyProjects);
 app.get('/projects/:projectId', projectRoutes.getProject);
 
@@ -43,7 +46,9 @@ app.get('/projects/:projectId/iterations/current_backlog', iterationRoutes.getCu
 app.get('/projects/:projectId/iterations/backlog', iterationRoutes.getBacklog);
 app.get('/projects/:projectId/iterations/done/:howMany', iterationRoutes.getDone);
 
-
+//app.get('/projects/:projectId/releases', releaseRoutes.getAll);
+app.get('/projects/:projectId/releases/:release/burnup', releaseRoutes.getReleaseBurnup);
+app.get('/projects/:projectId/releases/:release/kanban', releaseRoutes.getReleaseKanban);
 
 app.use(express.static(__dirname + '/public'));
 

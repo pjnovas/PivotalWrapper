@@ -42,31 +42,36 @@ exports.getStoriesByType = function(req, res){
 
 			res.render('stories', {
 				locals: {
-			    	title: 'Historias de tipo: ' + req.params.type,
+			    	title: 'Historias de tipo ' + req.params.type,
 			    	stories: found,
 			    	project: proj
 			    	}
 		    });	
 
 		});
-
 	});
 };
 
 exports.getStoriesByLabel = function(req, res){
 
 	projectModel.Project.getOne(req.params.projectId, function (proj){
+		
+		var labelFormatted = req.params.label.replace(/-/g, "%20");		
+		storyModel.Story.getByLabel(req.params.projectId, labelFormatted, function(found){
 
-		storyModel.Story.getByType(req.params.projectId, req.params.label, function(found){
-
-			res.render('stories', {
-				locals: {
-			    	title: 'Historias con etiqueta ' + req.params.label,
-			    	stories: found,
-			    	project: proj
-			    	}
-		    });	
-
+			//if (req.params.format)
+				res.send(found, 200);
+		    /*else {
+				res.render('stories', {
+					locals: {
+				    	title: 'Historias de release: ' + labelFormatted,
+				    	stories: found,
+				    	project: proj
+				    	}
+			    });	
+		    }*/
+		    
 		});
+
 	});
 };

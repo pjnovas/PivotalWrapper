@@ -14,6 +14,7 @@ var mapToEntity = function(s, p){
 		description: s.description,
 		label: s.labels,
 		type: s.story_type,
+		state: s.current_state,
 		priority: 0,
 		project: p,
 		started: "", //(s.current_state === "started" && s.updated_at || "",
