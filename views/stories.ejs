@@ -2,7 +2,7 @@
 <div class="page-header">
 	<h1><a href="/projects/<%= project.id %>"><%= project.name %></a> - <%= title %></h1>
 
-	<ul class="pills">
+	<ul class="nav nav-pills">
       <li><a href="/projects/<%= project.id %>/stories">Todas</a></li>
       <li><a href="/projects/<%= project.id %>/stories/type/bug">Bugs</a></li>
       <li><a href="/projects/<%= project.id %>/stories/type/feature">Requerimientos</a></li>
@@ -11,7 +11,7 @@
   </ul>
 </div>
 <div class="row">
-  <div class="span16">
+  <div class="span8">
     <h2></h2>
 		<% if (stories.length) { %>
 		    <% stories.forEach(function(s){ %>

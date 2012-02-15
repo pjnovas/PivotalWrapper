@@ -80,9 +80,9 @@ function createChart(){
 		today = new Date(); //new Date('2012/02/08');
 	
 	function setReleasePoints(){
+		var spDonePoints = 0;
 		for(var i=0; i<sprintsAmm; i++){
 			var stories = sprints[i].stories;
-			var spDonePoints = 0;
 			
 			var exit = false;
 			

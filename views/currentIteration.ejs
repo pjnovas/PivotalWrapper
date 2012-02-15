@@ -1,7 +1,7 @@
 <div class="page-header">
   <h1><%= project.name %> - <%= title %></h1>
 
-  <ul class="pills">
+  <ul class="nav nav-pills">
       <li><a href="/projects/<%= project.id %>/iterations">Todos</a></li>
       <li><a href="/projects/<%= project.id %>/iterations/current">Actual</a></li>
       <li><a href="/projects/<%= project.id %>/iterations/current_backlog">Actual y Backlog</a></li>
@@ -10,7 +10,7 @@
     </ul>
 </div>
 <div class="row">
-  <div class="span16">
+  <div class="span8">
     <b>Sprint #<%= iteration.number %></b>
     <br/>
     <p>Inicio: <%= iteration.start %></p>

@@ -3,9 +3,12 @@
  */
 
 $(document).ready(function(){
-	
+	bindLoginCtrls();
 });
 
+function bindLoginCtrls(){
+	
+}
 
 
 
