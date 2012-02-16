@@ -4,13 +4,13 @@
 
 var express = require('express');
 
-var projectRoutes = require('./routes/project');
-var storyRoutes = require('./routes/story');
-var iterationRoutes = require('./routes/iteration');
-var releaseRoutes = require('./routes/release');
-var userRoutes = require('./routes/user');
+var projectRoutes = require('./controllers/project');
+var storyRoutes = require('./controllers/story');
+var iterationRoutes = require('./controllers/iteration');
+var releaseRoutes = require('./controllers/release');
+var userRoutes = require('./controllers/user');
 
-var memStore = require('connect').session.MemoryStore; //require('connect/middleware/session/memory');
+var memStore = require('connect').session.MemoryStore;
 
 var app = express.createServer();
 
