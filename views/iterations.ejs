@@ -18,6 +18,7 @@
     </ul>
   </div>
 </div>
+<hr/>
 <div class="row">
   <div class="span8">
     <ul id="sprints"></ul>
@@ -26,9 +27,7 @@
 
 <script id="tmplSprint" type="text/x-jquery-tmpl">
   <li>
-    <p><b>Sprint #${number}</b> - 
-    	<a href="/projects/<%= project.id %>/iterations/burnDown" target="_blank">burn down</a>
-    	</p>
+    <p><b>Sprint #${number}</b></p>
     <p>Inicio: ${start}</p>
     <p>Fin: ${end}</p>
     <p>FF: %${strength}</p>

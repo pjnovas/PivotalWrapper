@@ -32,24 +32,33 @@ exports.printIteration = function(req, res){
 
 	projectModel.Project.getOne(pid, function (proj){
 			
-		function renderView(data){
+		function renderView(stories){
 			res.render('printStories', {
 				layout: false,
 				locals: {
 			   		title: 'Historias',
-			    	stories: data.stories,
+			    	stories: stories,
 			    	project: proj
 			    }
 		    });	
 		}
-
+		
 		iterationModel.Iteration.get(pid, which, function (data){
-			renderView(data);
+			var stories = [];
+			if (data.length){
+				for (var i=0; i< data.length; i++){
+					for (var j=0; j< data[i].stories.length; j++){
+					    stories.push(data[i].stories[j]);
+					}	
+				}
+				renderView(stories);
+			}
+			else renderView(data.stories);
 		});
 	});
 };
 
-exports.getCurrentBurnDown = function(req, res){	
+exports.getCurrentBurnDown = function(req, res){
 	res.render('printBurnDown', {
 		layout: false,
 		locals: {

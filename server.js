@@ -4,11 +4,11 @@
 
 var express = require('express');
 
-var projectRoutes = require('./controllers/project');
-var storyRoutes = require('./controllers/story');
-var iterationRoutes = require('./controllers/iteration');
-var releaseRoutes = require('./controllers/release');
-var userRoutes = require('./controllers/user');
+var projectController = require('./controllers/project');
+var storyController = require('./controllers/story');
+var iterationController = require('./controllers/iteration');
+var releaseController = require('./controllers/release');
+var userController = require('./controllers/user');
 
 var memStore = require('connect').session.MemoryStore;
 
@@ -98,23 +98,23 @@ app.post('/sessions', function (req, res){
 });
 
 
-app.get('/login/token', userRoutes.loginByToken);
-app.get('/login/user', userRoutes.loginByUserAndPass);
+app.get('/login/token', userController.loginByToken);
+app.get('/login/user', userController.loginByUserAndPass);
 
-app.get('/projects', requiresLogin, projectRoutes.getMyProjects);
-app.get('/projects/:projectId', requiresLogin, projectRoutes.getProject);
+app.get('/projects', requiresLogin, projectController.getMyProjects);
+app.get('/projects/:projectId', requiresLogin, projectController.getProject);
 
-app.get('/projects/:projectId/stories', storyRoutes.getAllStoriesByProject);
-app.get('/projects/:projectId/stories/type/:type', storyRoutes.getStoriesByType);
-app.get('/projects/:projectId/stories/label/:label', storyRoutes.getStoriesByLabel);
+app.get('/projects/:projectId/stories', storyController.getAllStoriesByProject);
+app.get('/projects/:projectId/stories/type/:type', storyController.getStoriesByType);
+app.get('/projects/:projectId/stories/label/:label', storyController.getStoriesByLabel);
 
-app.get('/projects/:projectId/iterations:format?', iterationRoutes.getAll);
-app.get('/projects/:projectId/iterations/burnDown', releaseRoutes.getCurrentBurnDown);
-app.get('/projects/:projectId/iterations/:which/print', iterationRoutes.printIteration);
-app.get('/projects/:projectId/iterations/:which', iterationRoutes.getIteration);
+app.get('/projects/:projectId/burnDown', iterationController.getCurrentBurnDown);
+app.get('/projects/:projectId/iterations:format?', iterationController.getAll);
+app.get('/projects/:projectId/iterations/:which', iterationController.getIteration);
+app.get('/projects/:projectId/iterations/:which/print', iterationController.printIteration);
 
-app.get('/projects/:projectId/releases/:release/burnup', requiresLogin, releaseRoutes.getReleaseBurnup);
-app.get('/projects/:projectId/releases/:release/kanban', requiresLogin, releaseRoutes.getReleaseKanban);
+app.get('/projects/:projectId/releases/:release/burnup', requiresLogin, releaseController.getReleaseBurnup);
+app.get('/projects/:projectId/releases/:release/kanban', requiresLogin, releaseController.getReleaseKanban);
 
 app.use(express.static(__dirname + '/public'));
 
