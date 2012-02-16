@@ -7,7 +7,10 @@ $(document).ready(function(){
 });
 
 function bindLoginCtrls(){
-	
+	$('#changeLogin').bind('click', function(){
+		$('#loginUserPass').toggle();
+		$('#loginToken').toggle();
+	});
 }
 
 

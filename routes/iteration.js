@@ -2,26 +2,8 @@
 var iterationModel = require('../models/iteration');
 var projectModel = require('../models/project');
 
-exports.getCurrent = function(req, res){	
-	iterationModel.Iteration.getCurrent(req.params.projectId, function (data){
-		res.send(data, 200);
-    });
-};
-
-exports.getCurrentBacklog = function(req, res){
-	iterationModel.Iteration.getCurrentBacklog(req.params.projectId, function (data){
-		res.send(data, 200);
-    });
-};
-
-exports.getBacklog = function(req, res){
-	iterationModel.Iteration.getBacklog(req.params.projectId, function (data){
-		res.send(data, 200);
-    });
-};
-
-exports.getDone = function(req, res){
-	iterationModel.Iteration.getDone(req.params.projectId, req.params.howMany, function (data){
+exports.getIteration = function(req, res){	
+	iterationModel.Iteration.get(req.params.projectId, req.params.which, function (data){
 		res.send(data, 200);
     });
 };
@@ -46,7 +28,7 @@ exports.getAll = function(req, res){
 
 exports.printIteration = function(req, res){	
 	var pid = req.params.projectId, 
-		iid = req.params.iterationId;
+		which = req.params.which;
 
 	projectModel.Project.getOne(pid, function (proj){
 			
@@ -54,22 +36,16 @@ exports.printIteration = function(req, res){
 			res.render('printStories', {
 				layout: false,
 				locals: {
-			    	title: 'Historias',
+			   		title: 'Historias',
 			    	stories: data.stories,
 			    	project: proj
 			    }
 		    });	
 		}
 
-		if (iid === '1'){
-			iterationModel.Iteration.getCurrent(pid, function (data){
-				renderView(data);
-			});
-		} else {
-			iterationModel.Iteration.getOne(pid, iid, function (data){
-				renderView(data);
-			});
-		}
+		iterationModel.Iteration.get(pid, which, function (data){
+			renderView(data);
+		});
 	});
 };
 

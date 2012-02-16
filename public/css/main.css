@@ -287,12 +287,8 @@ a {
 
 /* LogIn */
 
-.loginToken {
+#loginToken {
 	display:none;
-}
-
-.loginUserPass {
-	
 }
 
 /* ***********************************************/

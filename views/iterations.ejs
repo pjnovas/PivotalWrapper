@@ -3,12 +3,20 @@
   <h1><a id="hproject" href="/projects/<%= project.id %>"><%= project.name %></a> - <%= title %></h1>
 
   <ul class="nav nav-pills">
-      <li><a href="#">Todos</a></li>
       <li class="active"><a href="#current">Actual</a></li>
       <li><a href="#current_backlog">Actual y Backlog</a></li>
       <li><a href="#backlog">Backlog</a></li>
-      <li><a href="#done/1">Terminados</a></li>
   </ul>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <ul>
+      <li><a href="/projects/<%= project.id %>/iterations/current/print" target="_blank">Imprimir Actual</a></li>
+      <li><a href="/projects/<%= project.id %>/iterations/current_backlog/print" target="_blank">Imprimir Actual y Backlog</a></li>
+      <li><a href="/projects/<%= project.id %>/iterations/backlog/print" target="_blank">Imprimir Backlog</a></li>
+    </ul>
+  </div>
 </div>
 <div class="row">
   <div class="span8">
@@ -26,8 +34,7 @@
     <p>FF: %${strength}</p>
     <p>VE: ${storyAmm}</p>
     <p>TE: ${tasksAmm}</p>
-    <a class="stories">Historias (${stories.length})</a>&nbsp;&nbsp;
-    <a href="/projects/<%= project.id %>/iterations/${number}/print" target="_blank">imprimir</a>
+    <a class="stories">Historias (${stories.length})</a>
     <ul class="storyList">
       {{each stories}}
         <li>

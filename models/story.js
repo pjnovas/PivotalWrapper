@@ -1,5 +1,5 @@
 
-var pivotal = require('../pivotalAPI/stories');
+var pivotal = require('../utils/pivotal/API-helper');
 var projectModel = require('../models/project');
 
 exports.Story = function() {
@@ -47,26 +47,15 @@ exports.Story.getAll = function(projectId, cb){
 
 	projectModel.Project.getOne(projectId, function(proj){
 
-		pivotal.getStories({
-			projectId: projectId
-		}, function(found){
-			cb( mapListToEntity(found, proj) );
+		pivotal.call('getAllStories', {
+			pid: projectId,
+			success: function(result){
+				cb(mapListToEntity((result.story || [result]), proj));
+			},
+			error: function(err){
+				//TODO: handle error
+			}
 		});
-
-	});
-};
-
-exports.Story.getOne = function(projectId, id, cb){
-
-	projectModel.Project.getOne(projectId, function(proj){
-
-		pivotal.getStories({
-			projectId: projectId,
-			storyId: id
-		}, function(found){
-			cb( mapToEntity(found, proj) );
-		});
-	
 	});
 };
 
@@ -74,13 +63,16 @@ exports.Story.getByType = function(projectId, type, cb){
 	
 	projectModel.Project.getOne(projectId, function(proj){
 
-		pivotal.getStories({
-			projectId: projectId,
-			type: type
-		}, function(found){
-			cb( mapListToEntity(found, proj) );
+		pivotal.call('getStoriesByType', {
+			pid: projectId,
+			type: type,
+			success: function(result){
+				cb(mapListToEntity((result.story || [result]), proj));
+			},
+			error: function(err){
+				//TODO: handle error
+			}
 		});
-
 	});
 };
 
@@ -88,11 +80,21 @@ exports.Story.getByLabel = function(projectId, label, cb){
 
 	projectModel.Project.getOne(projectId, function(proj){
 
-		pivotal.getStories({
-			projectId: projectId,
-			label: label
-		}, function(found){
-			cb( mapListToEntity(found, proj) );
+		pivotal.call('getStoriesByLabel', {
+			pid: projectId,
+			label: label,
+			success: function(result){
+				cb(mapListToEntity((result.story || [result]), proj));
+			},
+			error: function(err){
+				//TODO: handle error
+			}
 		});
 	});
 };
+
+
+
+
+
+

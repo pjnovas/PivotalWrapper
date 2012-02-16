@@ -1,5 +1,5 @@
 
-var pivotal = require('../pivotalAPI/tasks');
+var pivotal = require('../utils/pivotal/API-helper');
 
 exports.Task = function() {
 	
@@ -35,8 +35,16 @@ var mapListToEntity = function(ts){
 }
 
 exports.Task.getStoryTasks = function(pid, sid, cb){
-	pivotal.getStoryTasks(pid, sid, function(tasks){
-		cb( mapListToEntity(tasks) );
-	});
+	
+	pivotal.call('getTasksByStory', {
+		pid: pid,
+		sid: sid,
+		success: function(result){
+			cb(mapListToEntity(result.task || [result]));
+		},
+		error: function(err){
+			//TODO: handle error
+		}
+	});	
 };
 

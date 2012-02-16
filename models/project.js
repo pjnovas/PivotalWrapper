@@ -1,5 +1,5 @@
 
-var pivotal = require('../pivotalAPI/projects');
+var pivotal = require('../utils/pivotal/API-helper');
 
 exports.Project = function() {
 	
@@ -21,14 +21,27 @@ var mapListToEntity = function(ps){
 }
 
 exports.Project.getAll = function(cb){
-	pivotal.getProjects(function(projects){
-		cb( mapListToEntity(projects) );
+	
+	pivotal.call('getAllProjects', {
+		success: function(result){
+			cb(mapListToEntity(result.project));
+		},
+		error: function(err){
+			//TODO: handle error
+		}
 	});
 };
 
 exports.Project.getOne = function(id, cb){
-	pivotal.getProject(id, function(project){
-		cb( mapToEntity(project) );
+	
+	pivotal.call('getProjectById', {
+		pid: id,
+		success: function(result){
+			cb(mapToEntity(result));
+		},
+		error: function(err){
+			//TODO: handle error
+		}
 	});	
 };
 

@@ -17,13 +17,17 @@
 		<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.min.css">
 		<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js" ></script>
+		
+		<script type="text/javascript" src="/js/jquery-1.6.2.min.js" ></script>
+		<script type="text/javascript" src="/js/jquery.tmpl.min.js" ></script>    
+		<script type="text/javascript" src="/js/main.js" ></script>
 		  
 		<!-- Le fav and touch icons -->
-		<link rel="shortcut icon" href="images/favicon.ico">
-		<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+		<link rel="shortcut icon" href="/bootstrap/images/favicon.ico">
+		<link rel="apple-touch-icon" href="/bootstrap/images/apple-touch-icon.png">
 		
-		<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/images/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/images/apple-touch-icon-114x114.png">
 		  
 		<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /> 
 	</head>
@@ -32,72 +36,26 @@
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</a>
 					<a class="brand" href="/">Pivotal Wrapper</a>
-					<div class="loginUserPass">
-						<form action="" class="pull-right">
-							<input class="input-small" type="text" placeholder="Username">
-							<input class="input-small" type="password" placeholder="Password">
-							<button class="btn" type="submit">Sign in</button>
-						</form>	
-					</div>
+					
+					<form id="loginUserPass" action="" class="navbar-form pull-right">
+						<input class="input-small" type="text" placeholder="Username">
+						<input class="input-small" type="password" placeholder="Password">
+						<button class="btn" type="submit">Ingresar</button>
+					</form>	
+					<form id="loginToken" action="" class="navbar-form pull-right">
+						<input class="input-medium" type="text" placeholder="Token">	
+			      		<button class="btn" type="submit">Ingresar</button>
+					</form>	
+					<a id="changeLogin" class="navbar pull-right" href="#">T&nbsp;&nbsp;&nbsp;</a>
 				</div>
 			</div>
 		</div>
-
-
-<!--
-	
-	 <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-	
-	
-	
-    <div class="topbar">
-      <div class="fill">
-        <div class="container">
-          	<a class="brand" href="/">Pivotal Wrapper</a>
-          	
-			<div class="loginToken">
-				<form action="" class="pull-right">
-			  		<input class="input-medium" type="text" placeholder="Token">	
-			      	<button class="btn" type="submit">Sign in</button>
-			  	</form>
+		<div class="container">
+			<div class="content">
+				<%- body %>
 			</div>
-			<div class="loginUserPass">
-				<form action="" class="pull-right">
-			  		<input class="input-small" type="text" placeholder="Username">
-			    	<input class="input-small" type="password" placeholder="Password">
-			    	<button class="btn" type="submit">Sign in</button>
-				</form>	
-			</div>
-        </div>
-      </div>
-    </div>
--->
-    <div class="container">
-
-      <div class="content">
-        <%- body %>
-      </div>
-
-      <footer>
-      </footer>
-
-    </div>
-    
-    <script type="text/javascript" src="/js/jquery-1.6.2.min.js" ></script>
-	<script type="text/javascript" src="/js/jquery.tmpl.min.js" ></script>    
-	<script type="text/javascript" src="/js/main.js" ></script>
+			<footer></footer>
+		</div>
   </body>
 </html>

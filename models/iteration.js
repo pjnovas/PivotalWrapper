@@ -1,5 +1,5 @@
 
-var pivotal = require('../pivotalAPI/iterations');
+var pivotal = require('../utils/pivotal/API-helper');
 var projectModel = require('../models/project');
 var storyModel = require('../models/story');
 var taskModel = require('../models/task');
@@ -71,43 +71,37 @@ var fillStoriesAndTasks = function(iteration, proj, cb){
 	fillStory();
 }
 
-exports.Iteration.getCurrent = function(pid, cb){
-
+exports.Iteration.get = function(pid, which, cb){
+	
 	projectModel.Project.getOne(pid, function(proj){
-
-		pivotal.getIteration(pid, 'current', function(iteration){
-			fillStoriesAndTasks(iteration, proj, cb);
+		
+		pivotal.call('getIteration', {
+			pid: pid,
+			which: which,
+			success: function(result){
+				if (which === 'current'){
+					fillStoriesAndTasks(result.iteration, proj, cb);
+				}
+				else cb(mapListToEntity(result.iteration || [result]));
+			},
+			error: function(err){
+				//TODO: handle error
+			}
 		});
+		
 	});
-};
-
-exports.Iteration.getCurrentBacklog = function(pid, cb){
-	pivotal.getIteration(pid, 'current_backlog', function(iterations){
-		cb( mapListToEntity(iterations, pid) );
-	});
-};
-
-exports.Iteration.getBacklog = function(pid, cb){
-	pivotal.getIteration(pid, 'backlog', function(iterations){
-		cb( mapListToEntity(iterations, pid) );
-	});
-};
+}
 
 exports.Iteration.getAll = function(pid, cb){
-	pivotal.getAllIterations(pid, function(iterations){
-		cb( mapListToEntity(iterations, pid) );
-	});
-};
-
-exports.Iteration.getDone = function(pid, howMany, cb){
-	pivotal.getDoneIterations(pid, howMany , function(iterations){
-		cb( mapListToEntity(iterations, pid) );
-	});
-};
-
-exports.Iteration.getOne = function(pid, iteId, cb){
-	pivotal.getIterationById(pid, iteId , function(iteration){
-		cb( mapToEntity(iteration, pid) );
+	
+	pivotal.call('getAllIterations', {
+		pid: pid,
+		success: function(result){
+			cb(mapListToEntity(result.iteration || [result]));
+		},
+		error: function(err){
+			//TODO: handle error
+		}
 	});
 };
 

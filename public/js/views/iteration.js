@@ -34,7 +34,7 @@ function getIterations(){
 	$("#sprints li").remove();
 	$("<li>").append("<div class='loading'></div>").appendTo("#sprints");
 
-	var which = $('li.active a', 'ul.pills').attr('href').substr(1);
+	var which = $('li.active a', 'ul.nav-pills').attr('href').substr(1);
 	
 	$.ajax({
 		type: "GET",
