@@ -118,7 +118,7 @@ app.get('/projects/:projectId/releases/:release/kanban', requiresLogin, releaseC
 
 app.use(express.static(__dirname + '/public'));
 
-app.listen(15058);
+app.listen(15059);
 console.log("Express server listening on port %d", app.address().port);
 
 
