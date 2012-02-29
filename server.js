@@ -10,7 +10,7 @@ var iterationController = require('./controllers/iteration');
 var releaseController = require('./controllers/release');
 var userController = require('./controllers/user');
 
-var memStore = require('connect').session.MemoryStore;
+//var memStore = require('connect').session.MemoryStore;
 
 var app = express.createServer();
 
@@ -21,14 +21,14 @@ app.configure(function(){
 	app.use(express.cookieParser());
 	
 	//app.use(express.cookieDecoder());
-	app.use(
+	/*app.use(
 		express.session({
 			secret: 'lokura',
 			store: memStore({
 				reapInterval: 60000 * 10
 			})
 		})
-	);	
+	);*/	
 	
 	app.use(app.router);
 	app.use(express.favicon());
@@ -37,6 +37,7 @@ app.configure(function(){
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+/*
 app.dynamicHelpers({
 		session: function(req, res){
 			return req.session;
@@ -46,14 +47,15 @@ app.dynamicHelpers({
 		}
 	}
 );
+*/
 
-function requiresLogin(req, res, next){
-	next();
+//function requiresLogin(req, res, next){
+//	next();
 	/*
 	if (req.session.user) next();
 	else res.redirect('sessions/new?redir=' + req.url);
 	*/
-}
+//}
 
 
 app.get('/', function (req, res){
@@ -61,7 +63,7 @@ app.get('/', function (req, res){
 });
 
 /* sessions */
-
+/*
 app.get('/sessions/new', function (req, res){
 	res.render('sessions/new', {
 			locals: {
@@ -95,14 +97,14 @@ app.post('/sessions', function (req, res){
 			}
 		}
 	);*/
-});
+/*});*/
 
 
 app.get('/login/token', userController.loginByToken);
 app.get('/login/user', userController.loginByUserAndPass);
 
-app.get('/projects', requiresLogin, projectController.getMyProjects);
-app.get('/projects/:projectId', requiresLogin, projectController.getProject);
+app.get('/projects', projectController.getMyProjects);
+app.get('/projects/:projectId', projectController.getProject);
 
 app.get('/projects/:projectId/stories', storyController.getAllStoriesByProject);
 app.get('/projects/:projectId/stories/type/:type', storyController.getStoriesByType);
@@ -113,8 +115,9 @@ app.get('/projects/:projectId/iterations:format?', iterationController.getAll);
 app.get('/projects/:projectId/iterations/:which', iterationController.getIteration);
 app.get('/projects/:projectId/iterations/:which/print', iterationController.printIteration);
 
-app.get('/projects/:projectId/releases/:release/burnup', requiresLogin, releaseController.getReleaseBurnup);
-app.get('/projects/:projectId/releases/:release/kanban', requiresLogin, releaseController.getReleaseKanban);
+app.get('/projects/:projectId/releases/:release/burnup', releaseController.getReleaseBurnup);
+app.get('/projects/:projectId/releases/:release/kanban', releaseController.getReleaseKanban);
+//app.get('/projects/:projectId/releases/:release/kanban', requiresLogin, releaseController.getReleaseKanban);
 
 app.use(express.static(__dirname + '/public'));
 
