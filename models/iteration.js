@@ -11,7 +11,7 @@ exports.Iteration = function() {
 var mapToEntity = function(i, pid){
 	var stories = [];
 
-	if (!i.stories.story.length){
+	if (i.stories.story && i.stories.story.length === 0){
 		stories = storyModel.mapStoryList([i.stories.story], {
 				id: pid,
 				name: ""
